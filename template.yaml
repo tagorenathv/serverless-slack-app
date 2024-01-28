@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  serverless-slack-app
+
+  Sample SAM Template for serverless-slack-app
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: hello_world/
+      Handler: app.lambda_handler
+      Runtime: python3.10
+      Architectures:
+        - x86_64
+      FunctionUrlConfig:
+        AuthType: NONE
+        InvokeMode: BUFFERED
+        Cors:
+          AllowCredentials: false
+          AllowMethods:
+            - POST
+            - GET
+          AllowOrigins:
+            - "*"
+      Policies:
+        - AWSLambdaExecute
+      Environment:
+        Variables:
+          SLACK_BOT_TOKEN: <slack-bot-token> # Add your slack bot toke here
+
+Outputs:
+  HelloWorldFunctionUrlEndpoint:
+    Description: "URL of the function"
+    Value:
+      Fn::GetAtt: HelloWorldFunctionUrl.FunctionUrl
+  HelloWorldFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt HelloWorldFunction.Arn
+  HelloWorldFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt HelloWorldFunctionRole.Arn
