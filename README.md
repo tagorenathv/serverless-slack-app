@@ -1,3 +1,7 @@
+# Blog links:
+- https://medium.com/@tagore.vuyyuru/building-a-serverless-slack-app-using-python-and-aws-sam-cd8a3b24f572
+- https://dev.to/tagorenathv/building-a-serverless-slack-app-using-python-and-aws-sam-4om7
+
 # serverless-slack-app
 
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
